@@ -11,7 +11,7 @@ const copyConfigs = [
 const getConfigs = configs => {
   let res = {}
   configs.forEach(val => {
-    res[val] = `./config/${val.replace('.', '_')}`
+    res[val] = `config/${val.replace('.', '_')}`
   })
 
   return res
@@ -90,6 +90,6 @@ module.exports = (api, options, rootOptions) => {
     }
   })
 
-  api.render('./template')
+  api.render('template')
   api.render(getConfigs(copyConfigs))
 }
