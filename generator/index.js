@@ -91,5 +91,5 @@ module.exports = (api, options, rootOptions) => {
   })
 
   api.render('/template')
-  api.render(getConfigs(copyConfigs))
+  // api.render(getConfigs(copyConfigs))
 }
