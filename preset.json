@@ -1,0 +1,5 @@
+{
+  "useConfigFiles": true,
+  "cssPreprocessor": "scss",
+  "plugins": {}
+}
