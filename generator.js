@@ -1,9 +1,19 @@
-const configs = require.context('./config', false)
-let copyConfigs = {}
+// let copyConfigs = {}
+const copyConfigs = [
+  'vue.config.js',
+  'jest.config.js',
+  'babel.config.js',
+  '.gitignore',
+  '.env',
+  '.postcssrc.js'
+]
 
-configs.forEach(k => {
-  copyConfigs[`./${k.replace('_', '.')}`] = `./config/${k}`
-})
+const getConfigs = configs => {
+  let res = {}
+  configs.forEach(val => {
+    res[val] = `./config/${val.replace('.', '_')}`
+  })
+}
 
 module.exports = (api, options, rootOptions) => {
   api.extendPackage({
@@ -80,5 +90,5 @@ module.exports = (api, options, rootOptions) => {
 
 
   api.render('./template')
-  api.render(copyConfigs)
+  api.render(getConfigs())
 }
