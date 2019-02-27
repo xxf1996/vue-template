@@ -13,6 +13,8 @@ const getConfigs = configs => {
   configs.forEach(val => {
     res[val] = `./config/${val.replace('.', '_')}`
   })
+
+  return res
 }
 
 module.exports = (api, options, rootOptions) => {
@@ -88,7 +90,6 @@ module.exports = (api, options, rootOptions) => {
     }
   })
 
-
   api.render('./template')
-  api.render(getConfigs())
+  api.render(getConfigs(copyConfigs))
 }
