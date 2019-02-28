@@ -1,12 +1,12 @@
 // let copyConfigs = {}
-const copyConfigs = [
-  'vue.config.js',
-  'jest.config.js',
-  'babel.config.js',
-  '.gitignore',
-  '.env',
-  '.postcssrc.js'
-]
+// const copyConfigs = [
+//   'vue.config.js',
+//   'jest.config.js',
+//   'babel.config.js',
+//   '.gitignore',
+//   '.env',
+//   '.postcssrc.js'
+// ]
 
 const getConfigs = configs => {
   let res = {}
