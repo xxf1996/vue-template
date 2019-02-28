@@ -19,6 +19,16 @@ const getConfigs = configs => {
 
 module.exports = (api, options, rootOptions) => {
   api.extendPackage({
+    'scripts': {
+      'serve': 'vue-cli-service serve --open',
+      'start': 'npm run serve',
+      'dev': 'npm run serve',
+      'build': 'vue-cli-service build',
+      'build:nomock': 'vue-cli-service build --mode nomock',
+      'build:travis': 'vue-cli-service build --mode travis',
+      'lint': 'vue-cli-service lint --fix',
+      'test:unit': 'vue-cli-service test:unit'
+    },
     'dependencies': {
       '@babel/runtime': '^7.2.0',
       '@d2-projects/d2-crud': '^2.0.3',
