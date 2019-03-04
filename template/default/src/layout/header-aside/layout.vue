@@ -26,12 +26,12 @@
         <!-- 顶栏右侧 -->
         <div class="d2-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
-          <d2-header-search @click="handleSearchClick"/>
-          <d2-header-error-log/>
-          <d2-header-fullscreen/>
-          <d2-header-theme/>
-          <d2-header-size/>
-          <d2-header-user/>
+          <d2-header-search v-if="rightConfig.search" @click="handleSearchClick"/>
+          <d2-header-error-log v-if="rightConfig.log"/>
+          <d2-header-fullscreen v-if="rightConfig.full"/>
+          <d2-header-theme v-if="rightConfig.theme"/>
+          <d2-header-size v-if="rightConfig.size"/>
+          <d2-header-user v-if="rightConfig.user"/>
         </div>
       </div>
       <!-- 下面 主体 -->
@@ -113,7 +113,16 @@ export default {
       // [侧边栏宽度] 正常状态
       asideWidth: '200px',
       // [侧边栏宽度] 折叠状态
-      asideWidthCollapse: '65px'
+      asideWidthCollapse: '65px',
+      // [顶部右侧] 图标配置，true为显示
+      rightConfig: {
+        search: false, // 页面搜索
+        log: this.$env === 'development', // 日志
+        full: true, // 全屏显示
+        theme: false, // 主题设置
+        size: false, // 字体大小
+        user: true // 用户设置
+      }
     }
   },
   computed: {
