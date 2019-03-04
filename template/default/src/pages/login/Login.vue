@@ -1,15 +1,15 @@
 <template>
   <div class="login">
     <el-card>
-      <el-form class="login-form" ref="loginForm" :rules="rules">
+      <el-form class="login-form" ref="loginForm" :rules="rules" :model="loginData">
         <el-form-item prop="uesrname"> 
           <el-input type="text" v-model="loginData.username" placeholder="用户名">
-            <i slot="prepend" class="fa fa-user-circle-o"></i>
+            <icon slot="prepend" name="user-circle-o"></icon>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input type="password" v-model="loginData.password" placeholder="密码">
-            <i slot="prepend" class="fa fa-keyboard-o"></i>
+            <icon slot="prepend" name="keyboard-o"></icon>
           </el-input>
         </el-form-item>
         <el-form-item prop="code">
@@ -27,19 +27,22 @@
 </template>
 
 <script>
+import icon from '@/components/d2-icon'
+import util from '@/libs/util'
 import identify from './Identify.vue'
 import {mapActions} from 'vuex'
 
 export default {
   name: 'Login',
   components: {
+    icon,
     identify
   },
   data () {
     return {
       loginData: {
-        username: 'console@doupai.cc',
-        password: 'console',
+        username: 'admin',
+        password: 'admin',
         code: ''
       },
       // 校验
@@ -71,8 +74,15 @@ export default {
         if (valid && this.loginData.code === this.identifyCode) {
           this.login({
             vm: this,
-            account: this.loginData.username,
-            pwd: this.loginData.password
+            username: this.loginData.username,
+            password: this.loginData.password
+          }).then(() => {
+            // 更新路由 尝试去获取 cookie 里保存的需要重定向的页面完整地址
+            const path = util.cookies.get('redirect')
+            // 根据是否存有重定向页面判断如何重定向
+            this.$router.replace(path ? { path } : '/index')
+            // 删除 cookie 中保存的重定向页面
+            util.cookies.remove('redirect')
           })
         } else {
           // 登录表单校验失败
@@ -93,14 +103,18 @@ export default {
       this.makeCode(4)
     }
   },
-  mouted () {
+  created () {
     this.makeCode(4)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .button-login {
+  @import '../../assets/style/public.scss';
+  .login {
+    width: 400px;
+  }
+  .login-btn {
     width: 100%;
   }
 </style>

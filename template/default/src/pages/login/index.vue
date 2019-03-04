@@ -1,5 +1,5 @@
 <template>
-  <div class="page-login">
+  <div class="page-login" flex="dir:top main:center cross:center">
     <login></login>
   </div>
 </template>
